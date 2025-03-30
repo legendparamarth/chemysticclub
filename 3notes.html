@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ChemysticClub | Notes</title>
+    <link rel="icon" type="image/png" href="logo1.png" sizes="32x32">
+    <!-- <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚗️</text></svg>"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* ===== GLOBAL STYLES ===== */
+        :root {
+            --chem-blue: #3498db;
+            --chem-dark: #2c3e50;
+            --chem-purple: #9b59b6;
+            --chem-green: #2ecc71;
+            --chem-red: #e74c3c;
+            --chem-yellow: #f1c40f;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ===== SMOOTH SCROLL & ANIMATIONS ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, var(--chem-dark), #1a252f);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-out;
+        }
+
+        header::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(52, 152, 219, 0.1) 0%, transparent 70%);
+            animation: float 8s infinite linear;
+            z-index: 0;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            background: rgba(44, 62, 80, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--chem-blue);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        nav a:hover::after {
+            transform: scaleX(1);
+        }
+
+        /* ===== SEARCH BAR ===== */
+        .search-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding-right: 50px;
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 5px 25px rgba(52, 152, 219, 0.3);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 3rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--chem-blue);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* ===== NOTES CONTAINER ===== */
+        .notes-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        /* ===== NOTE CARD ===== */
+        .note-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: slideUp 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .note-card:nth-child(1) { animation-delay: 0.1s; }
+        .note-card:nth-child(2) { animation-delay: 0.2s; }
+        .note-card:nth-child(3) { animation-delay: 0.3s; }
+        .note-card:nth-child(4) { animation-delay: 0.4s; }
+        .note-card:nth-child(5) { animation-delay: 0.5s; }
+        .note-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .note-card:hover {
+            transform: translateY(-10px) rotate(1deg);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .note-header {
+            background: linear-gradient(135deg, var(--chem-blue), var(--chem-purple));
+            color: white;
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        .note-header h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .note-header p {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .note-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            width: 100%;
+            height: 40px;
+            background: inherit;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+            opacity: 0.2;
+        }
+
+        .note-content {
+            padding: 1.5rem;
+        }
+
+        .note-content p {
+            margin-bottom: 1rem;
+            color: #555;
+        }
+
+        .note-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background: rgba(52, 152, 219, 0.1);
+            color: var(--chem-blue);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .download-btn {
+            display: inline-block;
+            background: var(--chem-blue);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background: var(--chem-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: linear-gradient(135deg, var(--chem-dark), #1a252f);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            color: var(--chem-blue);
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .notes-container {
+                grid-template-columns: 1fr;
+            }
+
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .search-container {
+                padding: 0 1rem;
+            }
+            
+            .search-icon {
+                right: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ===== HEADER ===== -->
+    <header>
+        <h1>Chemistry Notes Hub</h1>
+        <p>Master chemistry with beautifully organized notes</p>
+    </header>
+
+    <!-- ===== NAVIGATION ===== -->
+    <nav>
+        <ul>
+            <li><a href="about.html">Home</a></li>
+            <li><a href="video.html">Video Lectures</a></li>
+            <li><a href="calculators.html">Calculators</a></li>
+            <li><a href="resources.html">Resources</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== SEARCH BAR ===== -->
+    <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Search notes by topics..." id="searchInput">
+        <div class="search-icon" onclick="searchNotes()">
+            <i class="fas fa-search"></i>
+        </div>
+    </div>
+
+    <!-- ===== NOTES CONTAINER ===== -->
+    <div class="notes-container" id="notesContainer">
+        <!-- Note 1 -->
+        <div class="note-card">
+            <div class="note-header">
+                <h2>Atomic Structure</h2>
+                <p>Fundamentals of atoms & subatomic particles</p>
+            </div>
+            <div class="note-content">
+                <p>Comprehensive notes covering Bohr's model, quantum numbers, electron configuration, and periodic trends with visual diagrams.</p>
+                <div class="note-tags">
+                    <span class="tag">Physical Chemistry</span>
+                    <span class="tag">JEE/NEET</span>
+                </div>
+                <a href="pdf.pdf" class="download-btn">Download PDF</a>
+            </div>
+        </div>
+
+        <!-- Note 2 -->
+        <div class="note-card">
+            <div class="note-header" style="background: linear-gradient(135deg, var(--chem-green), #27ae60);">
+                <h2>Chemical Bonding</h2>
+                <p>Ionic, covalent & metallic bonds</p>
+            </div>
+            <div class="note-content">
+                <p>Detailed explanations of VSEPR theory, hybridization, molecular orbital theory with 3D structural diagrams.</p>
+                <div class="note-tags">
+                    <span class="tag" style="background: rgba(46, 204, 113, 0.1); color: var(--chem-green);">Inorganic</span>
+                    <span class="tag" style="background: rgba(46, 204, 113, 0.1); color: var(--chem-green);">Class 11</span>
+                </div>
+                <a href="#" class="download-btn" style="background: var(--chem-green);">Download PDF</a>
+            </div>
+        </div>
+
+        <!-- Note 3 -->
+        <div class="note-card">
+            <div class="note-header" style="background: linear-gradient(135deg, var(--chem-red), #c0392b);">
+                <h2>Thermodynamics</h2>
+                <p>Laws of energy & chemical reactions</p>
+            </div>
+            <div class="note-content">
+                <p>Complete guide to enthalpy, entropy, Gibbs free energy with solved numerical problems and graphs.</p>
+                <div class="note-tags">
+                    <span class="tag" style="background: rgba(231, 76, 60, 0.1); color: var(--chem-red);">Physical</span>
+                    <span class="tag" style="background: rgba(231, 76, 60, 0.1); color: var(--chem-red);">Class 12</span>
+                </div>
+                <a href="#" class="download-btn" style="background: var(--chem-red);">Download PDF</a>
+            </div>
+        </div>
+
+        <!-- Note 4 -->
+        <div class="note-card">
+            <div class="note-header" style="background: linear-gradient(135deg, var(--chem-purple), #8e44ad);">
+                <h2>Organic Mechanisms</h2>
+                <p>Reaction pathways & named reactions</p>
+            </div>
+            <div class="note-content">
+                <p>Flowcharts of SN1/SN2/E1/E2 mechanisms, electrophilic aromatic substitution with color-coded arrows.</p>
+                <div class="note-tags">
+                    <span class="tag" style="background: rgba(155, 89, 182, 0.1); color: var(--chem-purple);">Organic</span>
+                    <span class="tag" style="background: rgba(155, 89, 182, 0.1); color: var(--chem-purple);">NEET</span>
+                </div>
+                <a href="#" class="download-btn" style="background: var(--chem-purple);">Download PDF</a>
+            </div>
+        </div>
+
+        <!-- Note 5 -->
+        <div class="note-card">
+            <div class="note-header" style="background: linear-gradient(135deg, var(--chem-yellow), #f39c12);">
+                <h2>Electrochemistry</h2>
+                <p>Redox reactions & cells</p>
+            </div>
+            <div class="note-content">
+                <p>Nernst equation, conductivity, batteries with solved numericals and experiment diagrams.</p>
+                <div class="note-tags">
+                    <span class="tag" style="background: rgba(241, 196, 15, 0.1); color: var(--chem-yellow);">Physical</span>
+                    <span class="tag" style="background: rgba(241, 196, 15, 0.1); color: var(--chem-yellow);">JEE</span>
+                </div>
+                <a href="#" class="download-btn" style="background: var(--chem-yellow); color: #333;">Download PDF</a>
+            </div>
+        </div>
+
+        <!-- Note 6 -->
+        <div class="note-card">
+            <div class="note-header" style="background: linear-gradient(135deg, #1abc9c, #16a085);">
+                <h2>Coordination Compounds</h2>
+                <p>Werner's theory & isomerism</p>
+            </div>
+            <div class="note-content">
+                <p>CFT, spectrochemical series, naming conventions with 3D structure visualizations.</p>
+                <div class="note-tags">
+                    <span class="tag" style="background: rgba(26, 188, 156, 0.1); color: #1abc9c;">Inorganic</span>
+                    <span class="tag" style="background: rgba(26, 188, 156, 0.1); color: #1abc9c;">Class 12</span>
+                </div>
+                <a href="#" class="download-btn" style="background: #1abc9c;">Download PDF</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+        <p>&copy; 2025 ChemysticClub. All rights reserved.</p>
+        <p>Making chemistry accessible and exciting</p>
+        <div class="social-links">
+            <a href="https://www.instagram.com/chemysticclub/"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    
+    <!-- Search Functionality -->
+    <script>
+        function searchNotes() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toUpperCase();
+            const container = document.getElementById('notesContainer');
+            const cards = container.getElementsByClassName('note-card');
+            
+            for (let i = 0; i < cards.length; i++) {
+                const title = cards[i].getElementsByTagName('h2')[0];
+                const description = cards[i].getElementsByTagName('p')[0];
+                const tags = cards[i].getElementsByClassName('tag');
+                
+                let matchFound = false;
+                
+                // Check title and description
+                if (title.textContent.toUpperCase().indexOf(filter) > -1 || 
+                    description.textContent.toUpperCase().indexOf(filter) > -1) {
+                    matchFound = true;
+                }
+                
+                // Check tags if no match found yet
+                if (!matchFound) {
+                    for (let j = 0; j < tags.length; j++) {
+                        if (tags[j].textContent.toUpperCase().indexOf(filter) > -1) {
+                            matchFound = true;
+                            break;
+                        }
+                    }
+                }
+                
+                // Show/hide cards based on search
+                if (matchFound || filter === '') {
+                    cards[i].style.display = '';
+                } else {
+                    cards[i].style.display = 'none';
+                }
+            }
+        }
+        
+        // Add event listener for Enter key
+        document.getElementById('searchInput').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                searchNotes();
+            }
+        });
+    </script>
+</body>
+</html>

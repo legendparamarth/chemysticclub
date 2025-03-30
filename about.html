@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chemysticclub</title>
+    <link rel="icon" type="image/png" href="logo1.png" sizes="32x32">
+    
+    <style>
+        /* ===== GLOBAL ANIMATIONS & TRANSITIONS ===== */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 0 40px;
+            background-color: #f9f9f9;
+            min-width: 1200px;
+            opacity: 0;
+            animation: fadeIn 0.8s ease-in forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* ===== HEADER STYLES ===== */
+        header {
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-radius: 0 0 15px 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-20px);
+            opacity: 0;
+            animation: slideDown 0.6s ease-out 0.4s forwards;
+        }
+
+        @keyframes slideDown {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        header h2 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        header p {
+            font-size: 1.3em;
+            opacity: 0.9;
+        }
+
+        /* ===== NAVIGATION MENU ===== */
+        nav {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            padding: 15px;
+            margin-bottom: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            opacity: 0;
+            animation: slideDown 0.5s ease-out 0.6s forwards;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav li {
+            margin: 0 40px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.3em;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+            border-radius: 5px;
+            transform: translateY(0);
+        }
+
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* ===== SECTIONS ===== */
+        section {
+            background-color: white;
+            padding: 35px;
+            margin-bottom: 35px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s ease-out forwards;
+            animation-delay: 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* ===== HEADINGS ===== */
+        #home h1 {
+            font-size: 2.8em;
+            color: white;
+            padding: 25px;
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+            margin: 20px 0;
+            transform: scale(0.95);
+            animation: popIn 0.5s ease-out 0.8s forwards;
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.95); opacity: 0; }
+            80% { transform: scale(1.05); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        section h2 {
+            font-size: 2.2em;
+            color: white;
+            margin: 0 -35px 25px -35px;
+            padding: 20px 35px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+            letter-spacing: 0.5px;
+        }
+
+        section h3 {
+            font-size: 1.6em;
+            color: #2c3e50;
+            margin: 30px 0 15px 0;
+            padding-bottom: 8px;
+            border-bottom: 3px solid #3498db;
+            display: inline-block;
+        }
+
+        /* ===== CALCULATORS ===== */
+        .calculator {
+            background-color: #f8fafc;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px solid #e0e6ed;
+            transition: all 0.3s ease;
+        }
+
+        .calculator:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .calculator h1 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #3498db;
+        }
+
+        .formula {
+            font-style: italic;
+            color: #7f8c8d;
+            margin: 15px 0;
+            text-align: center;
+            font-size: 1.1em;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            font-size: 1.1em;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 8px rgba(52, 152, 219, 0.5);
+            transform: scale(1.02);
+        }
+
+        button {
+            margin: 15px 0;
+            padding: 12px;
+            font-size: 1.1em;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+            background: linear-gradient(135deg, #2980b9, #3498db);
+        }
+
+        /* ===== FOUNDER FLIP CARDS ===== */
+        .founder-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .founder-card {
+            width: 200px;
+            height: 250px;
+            perspective: 1000px;
+        }
+
+        .founder-card-inner {
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+
+        .founder-card:hover .founder-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .founder-card-front, .founder-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .founder-card-front {
+            background: white;
+        }
+
+        .founder-card-front img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #3498db;
+        }
+
+        .founder-card-back {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center;
+            padding: 35px;
+            background: linear-gradient(135deg, #2c3e50, #1a252f);
+            color: white;
+            border-radius: 8px;
+            margin-top: 50px;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+            transform: translateY(20px);
+            opacity: 0;
+            animation: slideUp 0.6s ease-out 0.9s forwards;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        /* ===== RESPONSIVE ADJUSTMENTS ===== */
+        @media (max-width: 1600px) {
+            nav li {
+                margin: 0 30px;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            body {
+                min-width: 100%;
+                padding: 0 20px;
+            }
+            
+            nav li {
+                margin: 0 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            nav ul {
+                flex-wrap: wrap;
+            }
+            
+            nav li {
+                margin: 10px 15px;
+            }
+            
+            section h2 {
+                font-size: 1.8em;
+                padding: 15px 20px;
+                margin: 0 -20px 20px -20px;
+            }
+
+            .founder-card {
+                width: 150px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="content-container">
+        <!-- Website Header -->
+        <header>
+            <h2>Chemystic Club</h2>    
+            <p>Ultimate Chemistry Resource for you!!</p>
+        </header>
+        
+        <!-- Navigation Menu -->
+        <!-- ===== ENHANCED NAVIGATION MENU ===== -->
+<nav>
+    <ul>
+        <li><a href="index.html" class="nav-btn">Home</a></li>
+        <li><a href="video.html" class="nav-btn">Video Lectures</a></li>
+        <li><a href="3notes.html" class="nav-btn">Notes</a></li>
+        <li><a href="calculators.html" class="nav-btn">Calculators</a></li>
+        <li><a href="resources.html" class="nav-btn">Resources</a></li>
+        <li><a href="about.html" class="nav-btn">About</a></li>
+    </ul>
+</nav>
+
+<style>
+    /* ===== SUPERCHARGED NAV BUTTONS ===== */
+    .nav-btn {
+        display: inline-block;
+        position: relative;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        transform-origin: center;
+    }
+
+    .nav-btn:hover {
+        transform: translateY(-5px) scale(1.1);
+        text-shadow: 0 0 10px rgba(255,255,255,0.7);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+
+    /* Glow effect */
+    .nav-btn::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at center, 
+                  rgba(255,255,255,0.8) 0%, 
+                  rgba(255,255,255,0) 70%);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        border-radius: 5px;
+        z-index: -1;
+    }
+
+    .nav-btn:hover::after {
+        opacity: 0.4;
+    }
+
+    /* Floating dot animation */
+    .nav-btn::before {
+        content: '•';
+        position: absolute;
+        bottom: -15px;
+        left: 50%;
+        transform: translateX(-50%) scale(0);
+        color: #3498db;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .nav-btn:hover::before {
+        transform: translateX(-50%) scale(1);
+        bottom: -10px;
+    }
+</style>
+        
+        <!-- Main Content Sections -->
+        <section id="home">
+            <h1><b>Welcome to Chemysticclub</b></h1>
+            <p><h3>Explore our precious chemistry resources designed only for you.</h3></p>
+            <img src="logo2.png" alt="Chemistry banner" style="width:80%; border-radius:8px; margin:20px 0; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+        </section>
+        
+        <section id="periodic-table">
+            <h2>Modern Periodic Table</h2>
+            <img src="mpt2.jpg" style="width:100%; border-radius:8px; margin:10px 0; box-shadow:0 2px 8px rgba(0,0,0,0.1);">
+            <div style="background-color:#f8f9fa; padding:25px; text-align:center; border-radius:8px; margin-top:20px; border:1px solid #e0e6ed;">
+                <h3>Explore the Modern Periodic Table with us!!</h3>
+            </div>
+        </section>
+        
+        <section id="calculators">
+            <h2>Chemistry Calculators</h2>
+            
+            <div class="calculator">
+                <h1>Molar Mass Calculator</h1>
+                <p>Enter a chemical formula (e.g., H2O, C6H12O6, NaCl):</p>
+                <input type="text" id="formulaInput" placeholder="Chemical formula">
+                <button onclick="calculateMolarMass()">Calculate Molar Mass</button>
+                <div id="result" class="result" style="display: none; padding:15px; background:#e8f4fc; border-radius:6px;">
+                    <strong>Molar Mass:</strong> <span id="molarMassValue"></span> g/mol
+                </div>
+                <div id="error" style="color:#e74c3c; margin-top:10px;"></div>
+            </div>
+            
+            <div class="calculator" style="margin-top:40px;">
+                <h1>Dilution Calculator</h1>
+                <div style="margin-bottom:15px;">
+                    <label for="c1" style="display:block; margin-bottom:5px; font-weight:bold;">Initial Concentration (M):</label>
+                    <input type="number" id="c1" step="0.0001" placeholder="Enter molarity">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label for="v1" style="display:block; margin-bottom:5px; font-weight:bold;">Initial Volume (mL):</label>
+                    <input type="number" id="v1" step="0.1" placeholder="Enter volume">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label for="c2" style="display:block; margin-bottom:5px; font-weight:bold;">Final Concentration (M):</label>
+                    <input type="number" id="c2" step="0.0001" placeholder="Enter desired molarity">
+                </div>
+                <div style="margin-bottom:15px;">
+                    <label for="v2" style="display:block; margin-bottom:5px; font-weight:bold;">Final Volume (mL):</label>
+                    <input type="number" id="v2" step="0.1" placeholder="Enter desired volume">
+                </div>
+                <div class="formula">Dilution Formula: C₁V₁ = C₂V₂</div>
+                <button onclick="calculateDilution()" style="width:100%;">Calculate Dilution</button>
+                <div id="dilutionResult" style="padding:15px; background:#e8f4fc; border-radius:6px; display:none;"></div>
+            </div>
+        </section>
+        
+        <section id="resources">
+            <h2>Learning Resources</h2>
+            <h3>Common Chemical Formulas</h3>
+            <ul style="list-style-type:square; padding-left:20px;">
+                <li><strong>Water:</strong> H₂O</li>
+                <li><strong>Table Salt:</strong> NaCl</li>
+                <li><strong>Glucose:</strong> C₆H₁₂O₆</li>
+                <li><strong>Sulfuric Acid:</strong> H₂SO₄</li>
+            </ul>
+            
+            <h3>Basic Laboratory Equipment</h3>
+            <ul>
+                <li>Beaker</li>
+                <li>Erlenmeyer Flask</li>
+                <li>Graduated Cylinder</li>
+                <li>Bunsen Burner</li>
+            </ul>
+        </section>
+        
+        <section id="about">
+            <h2>About Chemysticclub</h2>
+            <p><h4>Founders of ChemysticClub</h4></p>
+            <div class="founder-grid">
+                <div class="founder-card">
+                    <div class="founder-card-inner">
+                        <div class="founder-card-front">
+                            <img src="logo1.png" alt="Siddharth">
+                            <h4>Siddharth Dharam Chand</h4>
+                        </div>
+                        <div class="founder-card-back">
+                            <p>Co-Founder</p>
+                            <p>____________________</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-card-inner">
+                        <div class="founder-card-front">
+                            <img src="logo1.png" alt="Ashutosh">
+                            <h4>Ashutosh Kumar</h4>
+                        </div>
+                        <div class="founder-card-back">
+                            <p>Co-Founder</p>
+                            <p>Chemistry Expert</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-card-inner">
+                        <div class="founder-card-front">
+                            <img src="logo1.png" alt="Ankit">
+                            <h4>Ankit Aaditya Giri</h4>
+                        </div>
+                        <div class="founder-card-back">
+                            <p>Co-Founder</p>
+                            <p>Design Specialist</p>
+                        </div>
+                         
+                    </div>
+                </div>
+                <div class="founder-card">
+                    <div class="founder-card-inner">
+                        <div class="founder-card-front">
+                            <img src="logo1.png" alt="Paramarth">
+                            <h4>Paramarth Karam Chand</h4>
+                        </div>
+                        <div class="founder-card-back">
+                            <p>Co-Founder</p>
+                            <p>Web Developer<br>and<br>Content Creator</p>
+                        </div>
+                            
+                    </div>
+                </div>
+            </div>
+            <br>
+            <p style="margin-top: 30px;">Chemysticclub was founded in 2025 to provide accessible chemistry resources to learners worldwide.</p>
+            <p>Our mission is to make chemistry understandable and engaging for everyone.</p>
+        </section>
+        
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 ChemysticClub. All rights reserved.</p>
+            <p>Contact: kumarashutosh1224@gmail.com</p>
+        </footer>
+    </div>
+
+    <script>
+        // Molar Mass Calculator Script
+        const atomicMasses = {
+            'H': 1.008, 'He': 4.0026, 'Li': 6.94, 'Be': 9.0122,
+            'B': 10.81, 'C': 12.011, 'N': 14.007, 'O': 15.999,
+            'F': 18.998, 'Ne': 20.180, 'Na': 22.990, 'Mg': 24.305,
+            'Al': 26.982, 'Si': 28.085, 'P': 30.974, 'S': 32.06,
+            'Cl': 35.45, 'K': 39.098, 'Ca': 40.078, 'Fe': 55.845,
+            'Cu': 63.546, 'Zn': 65.38, 'Ag': 107.87, 'I': 126.90,
+            'Ba': 137.33, 'Pb': 207.2
+        };
+
+        function calculateMolarMass() {
+            const formula = document.getElementById('formulaInput').value.trim();
+            const resultDiv = document.getElementById('result');
+            const errorDiv = document.getElementById('error');
+            
+            resultDiv.style.display = 'none';
+            errorDiv.textContent = '';
+            
+            if (!formula) {
+                errorDiv.textContent = 'Please enter a chemical formula.';
+                return;
+            }
+            
+            try {
+                const molarMass = parseFormula(formula);
+                document.getElementById('molarMassValue').textContent = molarMass.toFixed(3);
+                resultDiv.style.display = 'block';
+                resultDiv.style.animation = 'fadeIn 0.5s ease-out';
+            } catch (e) {
+                errorDiv.textContent = 'Error: ' + e.message;
+                errorDiv.style.animation = 'shake 0.4s ease-in-out';
+            }
+        }
+
+        function parseFormula(formula) {
+            let totalMass = 0;
+            let i = 0;
+            
+            while (i < formula.length) {
+                if (/[A-Z]/.test(formula[i])) {
+                    let element = formula[i];
+                    i++;
+                    
+                    if (i < formula.length && /[a-z]/.test(formula[i])) {
+                        element += formula[i];
+                        i++;
+                    }
+                    
+                    if (!atomicMasses[element]) {
+                        throw new Error(`Unknown element: ${element}`);
+                    }
+                    
+                    let numAtoms = 1;
+                    if (i < formula.length && /[0-9]/.test(formula[i])) {
+                        let numStr = '';
+                        while (i < formula.length && /[0-9]/.test(formula[i])) {
+                            numStr += formula[i];
+                            i++;
+                        }
+                        numAtoms = parseInt(numStr, 10);
+                    }
+                    
+                    totalMass += atomicMasses[element] * numAtoms;
+                } 
+                else if (formula[i] === '(') {
+                    const groupStart = i + 1;
+                    let groupEnd = formula.indexOf(')', groupStart);
+                    if (groupEnd === -1) {
+                        throw new Error('Unclosed parentheses in formula');
+                    }
+                    
+                    const groupFormula = formula.substring(groupStart, groupEnd);
+                    const groupMass = parseFormula(groupFormula);
+                    
+                    i = groupEnd + 1;
+                    let multiplier = 1;
+                    if (i < formula.length && /[0-9]/.test(formula[i])) {
+                        let numStr = '';
+                        while (i < formula.length && /[0-9]/.test(formula[i])) {
+                            numStr += formula[i];
+                            i++;
+                        }
+                        multiplier = parseInt(numStr, 10);
+                    }
+                    
+                    totalMass += groupMass * multiplier;
+                } 
+                else {
+                    throw new Error(`Invalid character in formula: ${formula[i]}`);
+                }
+            }
+            
+            return totalMass;
+        }
+
+        // Dilution Calculator Script
+        function calculateDilution() {
+            const c1 = parseFloat(document.getElementById('c1').value);
+            const v1 = parseFloat(document.getElementById('v1').value);
+            const c2 = parseFloat(document.getElementById('c2').value);
+            const v2 = parseFloat(document.getElementById('v2').value);
+            
+            const emptyFields = [!c1, !v1, !c2, !v2].filter(x => x).length;
+            
+            if (emptyFields !== 1) {
+                alert("Please leave exactly one field empty to calculate!");
+                return;
+            }
+            
+            let resultText = "";
+            
+            if (!c1) {
+                const calculated = (c2 * v2) / v1;
+                resultText = `Initial Concentration (C₁) = ${calculated.toFixed(4)} M`;
+            } 
+            else if (!v1) {
+                const calculated = (c2 * v2) / c1;
+                resultText = `Initial Volume (V₁) = ${calculated.toFixed(2)} mL`;
+            }
+            else if (!c2) {
+                const calculated = (c1 * v1) / v2;
+                resultText = `Final Concentration (C₂) = ${calculated.toFixed(4)} M`;
+            }
+            else if (!v2) {
+                const calculated = (c1 * v1) / c2;
+                resultText = `Final Volume (V₂) = ${calculated.toFixed(2)} mL`;
+            }
+            
+            const resultDiv = document.getElementById('dilutionResult');
+            resultDiv.innerHTML = `<strong>Result:</strong> ${resultText}`;
+            resultDiv.style.display = "block";
+            resultDiv.style.animation = "fadeIn 0.5s ease-out";
+        }
+    </script>
+</body>
+</html>
